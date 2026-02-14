@@ -2,7 +2,7 @@
 
 - [x] 0.1 Ensure main and develop branches exist
 - [x] 0.2 Create feature branch: `git checkout -b feature/vocab-api develop`
-- [ ] 0.3 Configure branch protection rules for main/develop
+- [x] 0.3 Configure branch protection rules for main/develop
 
 ## 1. Project Setup
 
@@ -14,17 +14,17 @@
 
 ## 2. Authentication
 
-- [ ] 2.1 Enable Supabase Auth in Supabase dashboard
+- [x] 2.1 Enable Supabase Auth in Supabase dashboard
 - [x] 2.2 Create JWT verification dependency in FastAPI
 - [x] 2.3 Extract user_id from JWT token in protected endpoints
 - [x] 2.4 Add authentication middleware/dependency to all vocabulary endpoints
 
 ## 3. Database Schema
 
-- [ ] 3.1 Create vocabularies table in Supabase
-- [ ] 3.2 Define column types: id, word, definition, example, user_id, current_day_index, next_review_date, status, streak_count, created_at, updated_at
-- [ ] 3.3 Enable Row Level Security (RLS) policies
-- [ ] 3.4 Create RLS policy: users can only see their own vocabularies
+- [x] 3.1 Create vocabularies table in Supabase
+- [x] 3.2 Define column types: id, word, definition, example, user_id, current_day_index, next_review_date, status, streak_count, created_at, updated_at
+- [x] 3.3 Enable Row Level Security (RLS) policies
+- [x] 3.4 Create RLS policy: users can only see their own vocabularies
 
 ## 4. API Models
 
