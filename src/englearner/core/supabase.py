@@ -8,10 +8,21 @@ load_dotenv()
 def get_supabase_client() -> Client:
     """Get Supabase client instance."""
     supabase_url: str = os.getenv("SUPABASE_URL", "")
-    supabase_key: str = os.getenv("SUPABASE_KEY", "")
+    supabase_key: str = os.getenv("SUPABASE_PUBLISHABLE_KEY", "")
 
     if not supabase_url or not supabase_key:
-        raise ValueError("SUPABASE_URL and SUPABASE_KEY must be set")
+        raise ValueError("SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY must be set")
+
+    return create_client(supabase_url, supabase_key)
+
+
+def get_supabase_admin_client() -> Client:
+    """Get Supabase client instance with admin privileges."""
+    supabase_url: str = os.getenv("SUPABASE_URL", "")
+    supabase_key: str = os.getenv("SUPABASE_SECRET_KEY", "")
+
+    if not supabase_url or not supabase_key:
+        raise ValueError("SUPABASE_URL and SUPABASE_SECRET_KEY must be set")
 
     return create_client(supabase_url, supabase_key)
 
