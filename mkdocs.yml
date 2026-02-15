@@ -1,6 +1,6 @@
 site_name: EngLearner API
 site_description: Vocabulary learning API with Fibonacci-based spaced repetition
-site_url: https://englearner.example.com
+site_url: https://englearner.example.com/documentations/
 
 nav:
   - Home: index.md
@@ -9,6 +9,8 @@ nav:
 
 theme:
   name: material
+
+use_absolute_urls: false
 
 markdown_extensions:
   - admonition
