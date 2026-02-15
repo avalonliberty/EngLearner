@@ -64,6 +64,6 @@
 
 - [x] 9.1 Run all tests and ensure passing
 - [x] 9.2 Create pull request to develop branch
-- [ ] 9.3 Get code review approval
-- [ ] 9.4 Merge feature branch to develop
-- [ ] 9.5 Delete feature branch
+- [x] 9.3 Get code review approval
+- [x] 9.4 Merge feature branch to develop
+- [x] 9.5 Delete feature branch
