@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 
 from ..core.auth import User, get_current_user
-from ..core.supabase import supabase
+from ..core.supabase import supabase, get_supabase_admin_client
 from .models import VocabularyCreate, VocabularyResponse, ReviewSubmit, ReviewResponse
 from .vocabulary import VocabularyService
 
@@ -10,6 +10,10 @@ router = APIRouter(prefix="/api/v1/vocabularies", tags=["vocabularies"])
 
 def get_vocabulary_service() -> VocabularyService:
     return VocabularyService(supabase)
+
+
+def get_admin_vocabulary_service() -> VocabularyService:
+    return VocabularyService(get_supabase_admin_client())
 
 
 @router.post("", response_model=VocabularyResponse, status_code=status.HTTP_201_CREATED)
@@ -52,3 +56,13 @@ async def submit_review(
         return service.submit_review(current_user.id, vocabulary_id, review)
     except ValueError as e:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
+
+
+@router.post("/test/create", response_model=VocabularyResponse, status_code=status.HTTP_201_CREATED)
+async def create_vocabulary_test(
+    vocab_data: VocabularyCreate,
+    service: VocabularyService = Depends(get_admin_vocabulary_service),
+):
+    """Test endpoint to add a vocabulary without authentication (for testing only)."""
+    test_user_id = "test-user-123"
+    return service.create_vocabulary(test_user_id, vocab_data)
