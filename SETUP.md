@@ -17,13 +17,12 @@ This document contains manual setup steps that need to be completed in external 
 3. Run the SQL
 
 ### 3. Get Credentials
-1. Go to **Project Settings** → **API**
-2. Copy:
-   - **Project URL** → set as `SUPABASE_URL` in `.env`
-   - **anon public** key → set as `SUPABASE_KEY` in `.env`
-   - **service_role** key → set as `SUPABASE_SERVICE_KEY` in `.env`
-3. Go to **Project Settings** → **JWT Secret**
-4. Copy the JWT secret → set as `SUPABASE_JWT_SECRET` in `.env`
+1. Go to **Project Settings** → **API Keys**
+2. Click **Create new API Keys** if you don't have them
+3. Copy:
+    - **Project URL** → set as `SUPABASE_URL` in `.env`
+    - **Publishable key** (format: `sb_publishable_...`) → set as `SUPABASE_PUBLISHABLE_KEY` in `.env`
+    - **Secret key** (format: `sb_secret_...`) → set as `SUPABASE_SECRET_KEY` in `.env`
 
 ## GitHub Setup
 
@@ -41,9 +40,8 @@ This document contains manual setup steps that need to be completed in external 
 Create a `.env` file:
 ```bash
 SUPABASE_URL=your_supabase_url
-SUPABASE_KEY=your_supabase_anon_key
-SUPABASE_SERVICE_KEY=your_service_role_key
-SUPABASE_JWT_SECRET=your_jwt_secret
+SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
+SUPABASE_SECRET_KEY=your_supabase_secret_key
 ```
 
 ## Run the API

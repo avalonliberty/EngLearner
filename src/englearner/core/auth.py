@@ -1,13 +1,11 @@
-import os
 from typing import Optional
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from jose import jwt, JWTError
 from pydantic import BaseModel
+from .supabase import get_supabase_client
 
 security = HTTPBearer()
-
-SUPABASE_JWT_SECRET = os.getenv("SUPABASE_JWT_SECRET", "")
+_supabase = get_supabase_client()
 
 
 class User(BaseModel):
@@ -21,22 +19,11 @@ async def get_current_user(
     """Verify JWT token and extract user ID."""
     token = credentials.credentials
 
-    if not SUPABASE_JWT_SECRET:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="JWT secret not configured",
-        )
-
     try:
-        payload = jwt.decode(token, SUPABASE_JWT_SECRET, algorithms=["HS256"])
-        user_id: str = payload.get("sub")
-        if user_id is None:
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Invalid token: missing user ID",
-            )
-        return User(id=user_id, email=payload.get("email"))
-    except JWTError as e:
+        user_response = _supabase.auth.get_user(token)
+        user = user_response.user
+        return User(id=user.id, email=user.email)
+    except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail=f"Invalid token: {str(e)}",
